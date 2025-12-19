@@ -454,6 +454,17 @@
         }
     }
 
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+
     .music-controls {
         position: fixed;
         bottom: 30px;
@@ -813,7 +824,7 @@
                 <!-- 4. Torta - 25 Enero 00:00 -->
                 <div class="col-md-6 col-lg-4">
                     <div class="card h-100">
-                        <img src="57391.jpeg" class="card-img-top" alt="Torta">
+                        <img src="fiesta-disco-960x640.webp" class="card-img-top" alt="Torta">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fas fa-birthday-cake"></i> Torta</h5>
                             <div class="event-time">25 de Enero - 00:00</div>
@@ -951,6 +962,12 @@
     </button>
 </div>
 
+<!-- MENSAJE DE MÚSICA -->
+<div id="musicMessage" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(200,169,81,0.95); color: white; padding: 15px 25px; border-radius: 25px; font-size: 0.9rem; z-index: 1001; display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: slideInDown 0.5s ease-out;">
+    <i class="fas fa-music" style="margin-right: 8px;"></i>
+    Haz clic en el botón de música para activar el audio 🎵
+</div>
+
 <!-- MÚSICA DE FONDO -->
 <audio id="backgroundMusic" loop preload="auto">
     <source src="Sin Bandera - Entra en Mi Vida.mp3" type="audio/mp3">
@@ -1023,13 +1040,31 @@
 
     // Intentar reproducir automáticamente después de interacción
     function startAutoMusic() {
-        music.play().then(() => {
-            musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            musicBtn.classList.add('playing');
-            isPlaying = true;
-        }).catch(e => {
-            console.log('Autoplay bloqueado, requiere interacción del usuario');
-        });
+        if (!isPlaying) {
+            music.play().then(() => {
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                musicBtn.classList.add('playing');
+                isPlaying = true;
+                // Ocultar mensaje de activación
+                const musicMsg = document.getElementById('musicMessage');
+                if (musicMsg) musicMsg.style.display = 'none';
+            }).catch(e => {
+                console.log('Autoplay bloqueado, requiere interacción del usuario');
+                // Mostrar mensaje para activar música
+                showMusicMessage();
+            });
+        }
+    }
+
+    // Mostrar mensaje para activar música
+    function showMusicMessage() {
+        const musicMsg = document.getElementById('musicMessage');
+        if (musicMsg) {
+            musicMsg.style.display = 'block';
+            setTimeout(() => {
+                musicMsg.style.display = 'none';
+            }, 5000);
+        }
     }
 
     // CONTADOR REGRESIVO AVANZADO
@@ -1176,8 +1211,16 @@
         document.addEventListener('click', startAutoMusic, { once: true });
         document.addEventListener('touchstart', startAutoMusic, { once: true });
         
-        // Intentar reproducir inmediatamente (puede fallar por políticas del navegador)
-        setTimeout(startAutoMusic, 1000);
+        // Intentar reproducir inmediatamente y mostrar mensaje si falla
+        setTimeout(() => {
+            startAutoMusic();
+            // Si no se reproduce automáticamente, mostrar mensaje después de 3 segundos
+            setTimeout(() => {
+                if (!isPlaying) {
+                    showMusicMessage();
+                }
+            }, 3000);
+        }, 1000);
     });
 </script>
 
