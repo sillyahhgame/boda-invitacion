@@ -1114,10 +1114,16 @@
             const dayElement = document.createElement('div');
             dayElement.className = 'calendar-day';
             dayElement.textContent = day;
-            
+
             if (eventDays.includes(day)) {
                 dayElement.classList.add('event');
-                dayElement.title = day === 24 ? 'Celebración Religiosa' : 'Misa de Salud y Recepción';
+                if (day === 24) {
+                    dayElement.title = 'Celebración Religiosa';
+                } else if (day === 25) {
+                    dayElement.title = 'Misa de Salud y Recepción';
+                } else if (day === 26) {
+                    dayElement.title = 'Día especial';
+                }
             }
             
             calendar.appendChild(dayElement);
