@@ -730,7 +730,7 @@
 <!-- SECCIÓN HERO -->
 <div class="hero-section">
     <div class="hero-content">
-        <h1 class="couple-names">Edwin & Lourdes</h1>
+        <h1 class="couple-names">Edwin y Lourdes</h1>
         <div class="quote">"Dos corazones, una sola alma"</div>
     </div>
 </div>
@@ -775,7 +775,7 @@
                         <img src="unnamed.gif" class="card-img-top" alt="Iglesia">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fas fa-church"></i> Misa Religiosa</h5>
-                            <div class="event-time">24 de Enero - 19:00</div>
+                            <div class="event-time">24 de Enero (Sábado) - 19:00</div>
                             <p class="card-text">
                                 Capilla Virgen de Lourdes "La Gruta"<br>
                                 Ceremonia religiosa de matrimonio
@@ -793,7 +793,7 @@
                         <img src="gigante-illimani.jpg" class="card-img-top" alt="Recepción">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fas fa-glass-cheers"></i> Recepción</h5>
-                            <div class="event-time">24 de Enero - 21:00</div>
+                            <div class="event-time">24 de Enero (Sábado) - 21:00</div>
                             <p class="card-text">
                                 Salón de eventos "Gigante Illimani"<br>
                                 Calle Brasil #105<br>
@@ -809,10 +809,10 @@
                 <!-- 3. Vals - 24 Enero 22:00 -->
                 <div class="col-md-6 col-lg-4">
                     <div class="card h-100">
-                        <img src="au-445_5_84547-171459139159403.webp" class="card-img-top" alt="Vals">
+                        <img src="vals.jpg" class="card-img-top" alt="Vals">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fas fa-music"></i> Vals</h5>
-                            <div class="event-time">24 de Enero - 22:00</div>
+                            <div class="event-time">24 de Enero (Sábado) - 22:00</div>
                             <p class="card-text">
                                 Primer baile de los novios<br>
                                 Un momento mágico
@@ -827,7 +827,7 @@
                         <img src="torta-boda.jpg" class="card-img-top" alt="Torta">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fas fa-birthday-cake"></i> Torta</h5>
-                            <div class="event-time">25 de Enero - 00:00</div>
+                            <div class="event-time">25 de Enero (Domingo) - 00:00</div>
                             <p class="card-text">
                                 Corte de la torta nupcial<br>
                                 Dulce momento para compartir
@@ -839,10 +839,10 @@
                 <!-- 5. Fiesta - 25 Enero 02:00 -->
                 <div class="col-md-6 col-lg-4">
                     <div class="card h-100">
-                        <img src="vals.jpg" class="card-img-top" alt="Fiesta">
+                        <img src="fiesta-disco-960x640.webp" class="card-img-top" alt="Fiesta">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fas fa-star"></i> Fiesta</h5>
-                            <div class="event-time">25 de Enero - 02:00</div>
+                            <div class="event-time">25 de Enero (Domingo) - 02:00</div>
                             <p class="card-text">
                                 ¡La celebración continúa!<br>
                                 Baile y diversión hasta el amanecer
@@ -857,7 +857,7 @@
                         <img src="santo-domingo-sucre-7.jpg" class="card-img-top" alt="Misa de Salud">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fas fa-cross"></i> Misa de Salud</h5>
-                            <div class="event-time">25 de Enero - 12:00</div>
+                            <div class="event-time">25 de Enero (Domingo) - 12:00</div>
                             <p class="card-text">
                                 Parroquia Santo Domingo<br>
                                 Bendición especial para el matrimonio
@@ -1098,8 +1098,8 @@
             calendar.appendChild(dayElement);
         });
 
-        // Enero 2026 empieza en miércoles
-        const firstDay = 3; // 0=domingo, 3=miércoles
+        // Enero 2026 - ajustado para que 24=sábado, 25=domingo, 26=lunes
+        const firstDay = 4; // 0=domingo, 4=jueves
         const daysInMonth = 31;
 
         // Espacios vacíos antes del primer día
@@ -1114,7 +1114,7 @@
             const dayElement = document.createElement('div');
             dayElement.className = 'calendar-day';
             dayElement.textContent = day;
-
+            
             if (eventDays.includes(day)) {
                 dayElement.classList.add('event');
                 if (day === 24) {
