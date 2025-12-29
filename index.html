@@ -9,13 +9,15 @@
 <!-- META TAGS PARA COMPARTIR -->
 <meta property="og:title" content="Edwin y Lourdes - Nuestra Boda">
 <meta property="og:description" content="Te invitamos a celebrar nuestro matrimonio el 24 y 25 de Enero 2026 en Sucre, Bolivia">
-<meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=630&fit=crop">
-<meta property="og:url" content="#">
+<meta property="og:image" content="https://i.imgur.com/7YzQjKx.jpg">
+<meta property="og:url" content="https://github.com/pages/">
 <meta property="og:type" content="website">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Edwin y Lourdes - Nuestra Boda">
 <meta name="twitter:description" content="Te invitamos a celebrar nuestro matrimonio el 24 y 25 de Enero 2026">
-<meta name="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=630&fit=crop">
+<meta name="twitter:image" content="https://i.imgur.com/7YzQjKx.jpg">
 
 <!-- BOOTSTRAP -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -952,7 +954,25 @@
         </div>
     </div>
 
-    <!-- MENSAJE FINAL -->
+    <!-- SECCIÓN PARA COMPARTIR -->
+    <div class="section">
+        <h2><i class="fas fa-share-alt"></i> Comparte nuestra invitación</h2>
+        <div class="divider"></div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: inline-block;">
+                <h3 style="color: #c8a951; margin-bottom: 20px;">Escanea para ver la invitación</h3>
+                <div id="qrcode" style="margin: 20px 0;"></div>
+                <p style="color: #666; font-size: 0.9rem;">O copia el enlace:</p>
+                <div style="background: #f9f7f2; padding: 10px; border-radius: 10px; margin-top: 10px; word-break: break-all; font-size: 0.8rem; color: #666;" id="linkText">
+                    [Tu link de GitHub Pages aquí]
+                </div>
+                <button onclick="copyLink()" style="background: #c8a951; color: white; border: none; padding: 10px 20px; border-radius: 20px; margin-top: 10px; cursor: pointer;">
+                    <i class="fas fa-copy"></i> Copiar enlace
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="section">
         <div class="quote">
             "Gracias por estar con nosotros este día tan especial.<br>
@@ -1203,7 +1223,26 @@
         });
     }
 
-    // INICIALIZACIÓN
+    // FUNCIÓN PARA COPIAR ENLACE
+    function copyLink() {
+        const linkText = document.getElementById('linkText').textContent;
+        navigator.clipboard.writeText(linkText).then(() => {
+            alert('¡Enlace copiado al portapapeles!');
+        });
+    }
+
+    // GENERAR QR CODE
+    function generateQR() {
+        const currentUrl = window.location.href;
+        document.getElementById('linkText').textContent = currentUrl;
+        
+        // Generar QR simple con API pública
+        const qrImg = document.createElement('img');
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentUrl)}`;
+        qrImg.style.border = '3px solid #c8a951';
+        qrImg.style.borderRadius = '10px';
+        document.getElementById('qrcode').appendChild(qrImg);
+    }
     document.addEventListener('DOMContentLoaded', function() {
         generateCalendar();
         updateCountdown();
